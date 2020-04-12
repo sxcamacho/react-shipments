@@ -1,0 +1,10 @@
+.app {
+  margin: 10px auto;
+  width: calc(100% - 20px);
+}
+
+@media (min-width: 1024px) {
+  .app {
+    width: 800px;
+  }
+}
