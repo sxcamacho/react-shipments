@@ -39,7 +39,8 @@ const itinerarySlice = createSlice({
       Object.assign(stopPoint, { completed: false });
     },
     deleteStopPoint(state, action) {
-      state = state.filter((stopPoint) => stopPoint.id !== action.payload);
+      const stopPointIndex = state.findIndex((stopPoint) => stopPoint.id === action.payload);
+      state.splice(stopPointIndex, 1);
     },
   }
 });
