@@ -1,10 +1,9 @@
 import { SubmissionError } from "redux-form";
 import { validateAddress } from "../../../../shared/services/validate-address";
-
 import IError from "../../Interfaces/IError";
 import IStopPoint from "../../Interfaces/IStopPoint";
 import IValidateAddressResponse from "../../Interfaces/IValidateAddressResponse";
-import { addStopPoint, updateStopPoint } from "../../actions";
+import { addStopPointWithReset, updateStopPointWithReset } from "../../itinerarySlice";
 
 export const formValidation = (values: IStopPoint) => {
   const errors: IError = { name: '', address: ''};
@@ -28,7 +27,7 @@ export const validateAddressAndSubmit = async (values: IStopPoint, dispatch: Fun
     if (responseData.valid) {
       if(values.id) {
         dispatch(
-          updateStopPoint({
+          updateStopPointWithReset({
             id: values.id,
             name: values.name,
             address: values.address,
@@ -38,7 +37,7 @@ export const validateAddressAndSubmit = async (values: IStopPoint, dispatch: Fun
       }
       else {
         dispatch(
-          addStopPoint({
+          addStopPointWithReset({
             id: responseData.id,
             name: values.name,
             address: values.address,

@@ -3,12 +3,8 @@ import { connect } from "react-redux";
 import { change } from "redux-form";
 import IStopPoint from "../../Interfaces/IStopPoint";
 import IItineraryProps from "../../Interfaces/IItineraryProps";
-import {
-  markStopPointAsCompleted,
-  markStopPointAsUncompleted,
-  deleteStopPoint,
-} from "../../actions";
 import styled, { css } from "styled-components";
+import { deleteStopPoint, updateStopPointAsCompleted, updateStopPointAsUncompleted } from "../../itinerarySlice";
 
 class StopPointList extends Component<IItineraryProps> {
   handleDeleteStopPoint(stopPoint: IStopPoint) {
@@ -106,9 +102,9 @@ class StopPointList extends Component<IItineraryProps> {
     if (stopPoint.id) {
       const completed: boolean = event.target.checked;
       if (completed) {
-        this.props.dispatch(markStopPointAsCompleted(stopPoint.id));
+        this.props.dispatch(updateStopPointAsCompleted(stopPoint.id));
       } else {
-        this.props.dispatch(markStopPointAsUncompleted(stopPoint.id));
+        this.props.dispatch(updateStopPointAsUncompleted(stopPoint.id));
       }
     }
   }
