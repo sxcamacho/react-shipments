@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { reduxForm, Field, formValueSelector } from "redux-form";
 import { formValidation, validateAddressAndSubmit } from "./validations";
 import IStopPointFormInputProps from "../../Interfaces/IStopPointFormInputProps";
-
-import "./styles.scss";
+import styled from "styled-components";
 
 const selector = formValueSelector("stopPoint");
 
@@ -12,7 +11,7 @@ class StopPointForm extends Component<IStopPointFormInputProps> {
   renderField({ input, label, type, meta: { touched, error } }) {
     return (
       <div className="field">
-        <label className="label">{label}</label>
+        <FieldLabel className="label">{label}</FieldLabel>
         <div className="control">
           <input
             {...input}
@@ -30,8 +29,8 @@ class StopPointForm extends Component<IStopPointFormInputProps> {
     const { pristine, invalid, reset, submitting, handleSubmit } = this.props;
 
     return (
-      <div className="stop-point-form card" data-testid="stop-point-form">
-        <header className="card-header">
+      <div className="card" data-testid="stop-point-form">
+        <CardHeader className="card-header">
           <span className="icon is-small is-left">
             <i className="fas fa-map-marked-alt"></i>
           </span>
@@ -40,7 +39,7 @@ class StopPointForm extends Component<IStopPointFormInputProps> {
               ? `Update stop point ${this.props.id}`
               : "Add stop point"}
           </p>
-        </header>
+        </CardHeader>
         <div className="card-content">
           <form
             onSubmit={handleSubmit(validateAddressAndSubmit)}
@@ -90,12 +89,26 @@ class StopPointForm extends Component<IStopPointFormInputProps> {
   }
 }
 
+// styles
+const CardHeader = styled.header`
+  box-shadow: none;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+  padding: 0 20px;
+`;
+
+const FieldLabel = styled.label`
+  font-weight: 400;
+`;
+
+// redux form
 const StopPointFormConnected = connect((state: any) => ({
   id: selector(state, "id"),
   name: selector(state, "name"),
   address: selector(state, "address"),
 }))(StopPointForm);
 
+// redux
 export default reduxForm({
   form: "stopPoint",
   validate: formValidation,

@@ -8,67 +8,78 @@ import {
   markStopPointAsUncompleted,
   deleteStopPoint,
 } from "../../actions";
-
-import "./styles.scss";
+import styled, { css } from "styled-components";
 
 class StopPointList extends Component<IItineraryProps> {
-  
   handleDeleteStopPoint(stopPoint: IStopPoint) {
-    if(stopPoint.id) {
+    if (stopPoint.id) {
       this.props.dispatch(deleteStopPoint(stopPoint.id));
     }
   }
 
   handleEditStopPoint(stopPoint: IStopPoint) {
-    if(stopPoint.id) {
-      this.props.dispatch(change('stopPoint', 'id', stopPoint.id));
-      this.props.dispatch(change('stopPoint', 'name', stopPoint.name));
-      this.props.dispatch(change('stopPoint', 'address', stopPoint.address));
+    if (stopPoint.id) {
+      this.props.dispatch(change("stopPoint", "id", stopPoint.id));
+      this.props.dispatch(change("stopPoint", "name", stopPoint.name));
+      this.props.dispatch(change("stopPoint", "address", stopPoint.address));
     }
   }
-  
+
   renderStopPoints() {
     return this.props.itinerary.map((stopPoint: IStopPoint) => {
+      const isStopPointCompleted = stopPoint.completed ? true : false;
+
       return (
         <tr
           key={stopPoint.id}
           className={`${stopPoint.completed ? "completed" : ""}`}
         >
-          <td>
-            <label className="checkbox">
-              <input
-                type="checkbox"
+          <StyledColumn>
+            <StyledLabel
+              className="checkbox"
+              stopPointCompleted={isStopPointCompleted}
+            >
+              <StyledCheckbox
                 onClick={(event) =>
-                  this.onChangeStopPointCompleted(
-                    stopPoint,
-                    event
-                  )
+                  this.onChangeStopPointCompleted(stopPoint, event)
                 }
                 defaultChecked={stopPoint.completed}
               />
               {stopPoint.id}
-            </label>
-          </td>
-          <td>
-            <label>{stopPoint.name}</label>
-          </td>
-          <td>
-            <label>{stopPoint.formattedAddress}</label>
-          </td>
-          <td>
-            <p className="buttons buttons-right">
-              <button className="button is-small" onClick={() => this.handleEditStopPoint(stopPoint)}>
-                <span className="icon is-small">
-                  <i className="fas fa-pen"></i>
-                </span>
-              </button>
-              <button className="button is-small" onClick={() => this.handleDeleteStopPoint(stopPoint)}>
-                <span className="icon is-small">
-                  <i className="fas fa-trash"></i>
-                </span>
-              </button>
-            </p>
-          </td>
+            </StyledLabel>
+          </StyledColumn>
+          <StyledColumn>
+            <StyledLabel stopPointCompleted={isStopPointCompleted}>
+              {stopPoint.name}
+            </StyledLabel>
+          </StyledColumn>
+          <StyledColumn>
+            <StyledLabel stopPointCompleted={isStopPointCompleted}>
+              {stopPoint.formattedAddress}
+            </StyledLabel>
+          </StyledColumn>
+          <StyledColumn>
+            <ActionContainer>
+              <p className="buttons buttons-right">
+                <button
+                  className="button is-small"
+                  onClick={() => this.handleEditStopPoint(stopPoint)}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-pen"></i>
+                  </span>
+                </button>
+                <button
+                  className="button is-small"
+                  onClick={() => this.handleDeleteStopPoint(stopPoint)}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-trash"></i>
+                  </span>
+                </button>
+              </p>
+            </ActionContainer>
+          </StyledColumn>
         </tr>
       );
     });
@@ -83,18 +94,15 @@ class StopPointList extends Component<IItineraryProps> {
     return (
       <tr>
         <td colSpan={4}>
-          <span>
+          <TotalContainer>
             Total stops: {`${stopPointsTotaCompleted}/${stopPointsTotal}`}
-          </span>
+          </TotalContainer>
         </td>
       </tr>
     );
   }
 
-  onChangeStopPointCompleted(
-    stopPoint: IStopPoint,
-    event: any
-  ) {
+  onChangeStopPointCompleted(stopPoint: IStopPoint, event: any) {
     if (stopPoint.id) {
       const completed: boolean = event.target.checked;
       if (completed) {
@@ -145,6 +153,44 @@ class StopPointList extends Component<IItineraryProps> {
   }
 }
 
+// styles
+const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+  line-height: 30px;
+
+  ${(props: { stopPointCompleted: boolean; forCheckbox?: boolean }) => {
+    return (
+      props.stopPointCompleted &&
+      css`
+        text-decoration: line-through;
+      `
+    );
+  }}
+`;
+
+const StyledColumn = styled.td`
+  vertical-align: top;
+`;
+
+const StyledCheckbox = styled.input.attrs({
+  type: "checkbox",
+})`
+  font-size: 1em;
+  margin-right: 10px;
+`;
+
+const ActionContainer = styled.div`
+  min-width: 70px;
+  float: right;
+`;
+
+const TotalContainer = styled.div`
+  font-style: italic;
+  padding: 10px;
+`;
+
+// redux
 const mapStateToProps = (state: any) => {
   return {
     itinerary: state.itinerary,
