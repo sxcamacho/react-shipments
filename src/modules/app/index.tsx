@@ -2,10 +2,11 @@ import React from "react";
 import Itinerary from "../itinerary/index.lazy";
 import styled from "styled-components";
 import device from "../../utils/device";
+import { withRedux } from "../../hocs/withRedux.component";
 
 function App() {
   return (
-    <AppContainer>
+    <AppContainer data-testid="app">
       <Itinerary />
     </AppContainer>
   );
@@ -20,4 +21,4 @@ const AppContainer = styled.div`
   }
 `;
 
-export default App;
+export default withRedux(App);

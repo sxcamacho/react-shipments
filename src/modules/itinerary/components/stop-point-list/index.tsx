@@ -4,7 +4,7 @@ import { change } from "redux-form";
 import IStopPoint from "../../Interfaces/IStopPoint";
 import IItineraryProps from "../../Interfaces/IItineraryProps";
 import styled, { css } from "styled-components";
-import { deleteStopPoint, updateStopPointAsCompleted, updateStopPointAsUncompleted } from "../../itinerarySlice";
+import { deleteStopPoint, updateStopPointAsCompleted, updateStopPointAsUncompleted } from "../../../../redux/features/itinerary/itinerarySlice";
 
 class StopPointList extends Component<IItineraryProps> {
   handleDeleteStopPoint(stopPoint: IStopPoint) {

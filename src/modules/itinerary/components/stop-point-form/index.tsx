@@ -44,7 +44,6 @@ class StopPointForm extends Component<IStopPointFormInputProps> {
           <form
             onSubmit={handleSubmit(validateAddressAndSubmit)}
             className="stop-point-form"
-            data-testid="stop-point-form"
           >
             {/* NAME */}
             <Field

@@ -1,4 +1,4 @@
-import IStopPoint from "./Interfaces/IStopPoint";
+import IStopPoint from "../../../modules/itinerary/Interfaces/IStopPoint";
 import { createSlice } from "@reduxjs/toolkit";
 import { reset } from "redux-form";
 

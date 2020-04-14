@@ -3,7 +3,7 @@ import { validateAddress } from "../../../../shared/services/validate-address";
 import IError from "../../Interfaces/IError";
 import IStopPoint from "../../Interfaces/IStopPoint";
 import IValidateAddressResponse from "../../Interfaces/IValidateAddressResponse";
-import { addStopPointWithReset, updateStopPointWithReset } from "../../itinerarySlice";
+import { addStopPointWithReset, updateStopPointWithReset } from "../../../../redux/features/itinerary/itinerarySlice";
 
 export const formValidation = (values: IStopPoint) => {
   const errors: IError = { name: '', address: ''};

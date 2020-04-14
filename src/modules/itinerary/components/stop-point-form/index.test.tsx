@@ -1,13 +1,14 @@
-import React from 'react';
-import { cleanup, render } from '@testing-library/react';
-import StopPointForm from '.';
+import React from "react";
+import { cleanup } from "@testing-library/react";
+import { renderWithRedux } from "../../../../hocs/renderWithRedux";
+import StopPointForm from ".";
 
-describe('<StopPointForm />', () => {
+describe("<StopPointForm />", () => {
   afterEach(cleanup);
 
-  test('it should mount', () => {
-    const { getByTestId } = render(<StopPointForm />);
-    const stopPointForm = getByTestId('StopPointForm');
+  test("it should mount", () => {
+    const { getByTestId } = renderWithRedux(<StopPointForm />);
+    const stopPointForm = getByTestId('stop-point-form');
 
     expect(stopPointForm).toBeInTheDocument();
   });

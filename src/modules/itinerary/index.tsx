@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Itinerary = () => {
   return (
-    <Container>
+    <Container data-testid="itinerary">
       <h1 className="title">
         Shipment Itinerary
       </h1>
