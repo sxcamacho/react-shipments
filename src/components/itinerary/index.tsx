@@ -1,7 +1,7 @@
 
 import React from "react";
-import StopPointForm from './components/stop-point-form'
-import StopPointList from './components/stop-point-list'
+import StopPointForm from '../stop-point-form'
+import StopPointList from '../stop-point-list'
 import styled from "styled-components";
 
 const Itinerary = () => {

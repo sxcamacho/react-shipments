@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup } from "@testing-library/react";
-import { renderWithRedux } from "../../../../hocs/renderWithRedux";
+import { renderWithRedux } from "../../hocs/renderWithRedux";
 import StopPointForm from ".";
 
 describe("<StopPointForm />", () => {

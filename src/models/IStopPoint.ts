@@ -1,4 +1,4 @@
-export default interface IStopPoint {
+export interface IStopPoint {
   id?:string
   name: string;
   address: string;

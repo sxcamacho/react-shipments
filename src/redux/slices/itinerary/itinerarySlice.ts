@@ -1,4 +1,4 @@
-import IStopPoint from "../../../modules/itinerary/Interfaces/IStopPoint";
+import { IStopPoint } from "../../../models";
 import { createSlice } from "@reduxjs/toolkit";
 import { reset } from "redux-form";
 
@@ -22,21 +22,28 @@ const itinerarySlice = createSlice({
       state.push({ ...action.payload, completed: false });
     },
     updateStopPoint(state, action) {
-      const { id } = action.payload;
-      const stopPoint = state.find((stopPoint) => stopPoint.id === id);
-      Object.assign(stopPoint, action.payload);
+      return state.map((stopPoint: IStopPoint) => {
+        if (stopPoint.id !== action.payload.id) {
+          return stopPoint;
+        }
+        
+        return {
+          ...stopPoint,
+          ...action.payload
+        }
+      });
     },
     updateStopPointAsCompleted(state, action) {
-      const stopPoint = state.find(
-        (stopPoint) => stopPoint.id === action.payload
-      );
-      Object.assign(stopPoint, { completed: true });
-    },
-    updateStopPointAsUncompleted(state, action) {
-      const stopPoint = state.find(
-        (stopPoint) => stopPoint.id === action.payload
-      );
-      Object.assign(stopPoint, { completed: false });
+      return state.map((stopPoint: IStopPoint) => {
+        if (stopPoint.id !== action.payload.id) {
+          return stopPoint;
+        }
+        
+        return {
+          ...stopPoint,
+          completed: action.payload.completed
+        }
+      });
     },
     deleteStopPoint(state, action) {
       const stopPointIndex = state.findIndex((stopPoint) => stopPoint.id === action.payload);
@@ -45,12 +52,13 @@ const itinerarySlice = createSlice({
   }
 });
 
+export const { actions, reducer } = itinerarySlice;
+
 export const {
   addStopPoint,
   updateStopPoint,
   updateStopPointAsCompleted,
-  updateStopPointAsUncompleted,
-  deleteStopPoint,
-} = itinerarySlice.actions;
+  deleteStopPoint
+} = actions;
 
-export default itinerarySlice.reducer;
+

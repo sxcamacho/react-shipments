@@ -1,4 +1,4 @@
-export default interface IStopPointFormInputProps {
+export interface IStopPointFormInputProps {
   id?: string;
   test?: string;
   name: string;

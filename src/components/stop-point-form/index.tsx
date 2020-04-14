@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field, formValueSelector } from "redux-form";
 import { formValidation, validateAddressAndSubmit } from "./validations";
-import IStopPointFormInputProps from "../../Interfaces/IStopPointFormInputProps";
+import { IStopPointFormInputProps } from "../../models";
 import styled from "styled-components";
 
 const selector = formValueSelector("stopPoint");

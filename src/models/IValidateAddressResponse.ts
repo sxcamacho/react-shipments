@@ -1,4 +1,4 @@
-export default interface IValidateAddressResponse {
+export interface IValidateAddressResponse {
   valid: boolean;
   id?: string;
   formattedAddress?: string;
