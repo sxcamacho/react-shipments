@@ -13,8 +13,10 @@
     "@types/react-dom": "^16.9.0",
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
+    "core-js": "^3.6.5",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
@@ -49,7 +51,6 @@
   "devDependencies": {
     "@types/react-redux": "^7.1.7",
     "@types/redux-form": "^8.2.3",
-    "@types/styled-components": "^5.0.1",
-    "redux-devtools": "^3.5.0"
+    "@types/styled-components": "^5.0.1"
   }
 }
