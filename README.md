@@ -2,7 +2,7 @@
 
 ### Demo
 
-[https://shipments.netlify.com/](https://shipments.netlify.com/)
+[https://shipments.netlify.app/](https://shipments.netlify.app/)
 
 ### Run locally
 
